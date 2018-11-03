@@ -2,10 +2,6 @@ let playerHand = []
 
 let dealerHand = []
 
-let playerTotal = ''
-
-let dealerTotal = ''
-
 // This is our list of 52 cards
 let cardDeck = [
   { face: '2', value: 2, suit: 'spades' },
@@ -102,45 +98,96 @@ const dealCardToPlayer = () => {
   // - pop another card
   let card = cardDeck.pop()
   // - push it to the hand
-  playerHand.push(card.value)
+  playerHand.push(card)
   // Add this card to the user interface by creating a new LI
   let newCardItem = document.createElement('li')
   // Make the text of the LI be the description of the card
   newCardItem.textContent = `The ${card.face} of ${card.suit}`
   // Append that LI to the UL
   playerHandList.appendChild(newCardItem)
-  // Call function that gets total
-  getPlayerTotal()
-  //Get total by iterating over each card value and add it to the player's total
-  // Add the values together
-}
 
-console.log(playerHand)
+  let thePlayerTotal = getPlayerTotal() // JS finds the function,
+  // ...THEN looks at the parenthesis and says CALL
+  //...THEN is sees the assignment operator and stores the function
+  //...call inside the variable. So thePlayerTotal isn't equal to
+  //...the function, it's equal to the function CALL
 
-const getPlayerTotal = () => {
-  for (let i = 0; i < playerHand.length; i++) {
-    playerTotal += playerHand[i]
+  console.log(`The total of the player hand is ${thePlayerTotal}`)
+  let playerTotalDisplay = document.querySelector('.player-total')
+  playerTotalDisplay.textContent = `Total ${thePlayerTotal}`
+  // If player goes over 21, bust and dealer wins
+
+  if (thePlayerTotal > 21) {
+    console.log('Bust! Dealer Wins!')
+    let bustForPlayer = document.querySelector('.game-results')
+    bustForPlayer.textContent = 'Bust! Dealer Wins!'
+
+    let hideHitButton = document.querySelector('.hit')
+    hideHitButton.classList.add('hidden')
+
+    let hideStayButton = document.querySelector('.stay')
+    hideStayButton.classList.add('hidden')
+
+    let showResetButton = document.querySelector('.reset')
+    showResetButton.classList.remove('hidden')
   }
 }
 
-console.log(playerTotal)
-// if (playerTotal)
+const getPlayerTotal = () => {
+  let playerTotal = 0
+  for (let i = 0; i < playerHand.length; i++) {
+    let card = playerHand[i]
+    playerTotal += card.value
+  }
+  return playerTotal // <-----Return means "dunzo"
+}
 
 const dealCardToDealer = () => {
   let dealerHandList = document.querySelector('.dealer-hand')
   let card = cardDeck.pop()
-
-  dealerHand.push(card.value)
+  dealerHand.push(card)
 
   let newCardItem = document.createElement('li')
-
   newCardItem.textContent = `The ${card.face} of ${card.suit}`
+
   dealerHandList.appendChild(newCardItem)
 
-  for (let i = 0; i < dealerHand.length; i++) {
-    dealerTotal += dealerHand[i]
+  let theDealerTotal = getDealerTotal()
+  console.log(`The dealer's total is ${theDealerTotal}`)
+
+  // // If the dealer's cards total less than 17, add another card
+  // if (theDealerTotal < 17) {
+
+  // }
+
+  let dealerTotalDisplay = document.querySelector('.dealer-total')
+  dealerTotalDisplay.textContent = `Total ${theDealerTotal}`
+
+  if (theDealerTotal > 21) {
+    console.log('Dealer Busts! You Win!')
+    let bustForDealer = document.querySelector('.game-results')
+    bustForDealer.textContent = 'Dealer Busts! You Win!'
+
+    let hideHitButton = document.querySelector('.hit')
+    hideHitButton.classList.add('hidden')
+
+    let hideStayButton = document.querySelector('.stay')
+    hideStayButton.classList.add('hidden')
   }
-  // console.log(dealerTotal)
+}
+
+const getDealerTotal = () => {
+  let dealerTotal = 0
+  for (let i = 0; i < dealerHand.length; i++) {
+    let card = dealerHand[i]
+    dealerTotal += card.value
+  }
+  return dealerTotal
+}
+
+const resetGame = () => {
+  location.reload()
+  console.log('Game Ready')
 }
 
 const main = () => {
@@ -157,12 +204,14 @@ const main = () => {
   }
 
   for (let count = 0; count < 2; count++) {
-    1
     dealCardToPlayer()
   }
 
+  console.log(dealerHand)
+
+  // If the dealer's cards total less than 17, add a card
   const revealDealerCards = () => {
-    for (let count = 0; count < 2; count++) {
+    if (dealerHand < 17) {
       dealCardToDealer()
     }
   }
@@ -174,10 +223,11 @@ const main = () => {
 
   // Find the stay button
   let stayButton = document.querySelector('.stay')
-  // Add an avent listener on 'click' that...
+  // Add an event listener on 'click' that...
   stayButton.addEventListener('click', revealDealerCards)
-  // console.log(playerHand)
-  // console.log(cardDeck)
+
+  let resetButton = document.querySelector('.reset')
+  resetButton.addEventListener('click', resetGame)
 }
 
 document.addEventListener('DOMContentLoaded', main)

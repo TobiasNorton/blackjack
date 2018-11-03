@@ -10,18 +10,32 @@
 
 <body>
   <h1>Blackjack</h1>
+  <div class="center">
+    <p class="game-results">Test Your Skills!</p>
+  </div>
+  <div class="center">
+    <button class="reset hidden">Play Again!</button>
+  </div>
 
-  <body>
-    <button class='hit'>hit</button>
-    <button class='stay'>stay</button>
-    <ul class='player-hand'>
-      <li>The Player Has:</li>
-    </ul>
+  <div class="play-area">
+    <div class="left">
+      <button class="hit">Hit</button>
+      <ul class="player-hand">
+        <li>The Player Has:</li>
+        <li class="player-total">Total 0</li>
+      </ul>
+    </div>
 
-    <ul class='dealer-hand'>
-      <li>The Dealer Has:</li>
-    </ul>
-    <script src="/main.js" charset="utf-8"></script>
-  </body>
+    <div class="right">
+      <button class="stay">Stay</button>
+      <ul class="dealer-hand">
+        <li>The Dealer Has:</li>
+        <li class="dealer-total">Cards Facedown</li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="/main.js" charset="utf-8"></script>
+</body>
 
 </html>

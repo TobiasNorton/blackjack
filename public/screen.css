@@ -7,3 +7,51 @@ body {
   min-height: 100%;
   font: 16px / 1 sans-serif;
 }
+
+h1 {
+  color: white;
+  margin: 0;
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  font-size: 4.5rem;
+  text-align: center;
+  background-image: linear-gradient(transparent, black),
+    url('https://picjumbo.com/wp-content/uploads/playing-cards_free_stock_photos_picjumbo_DSC07167-2210x1473.jpg');
+}
+
+p {
+  font-size: 2.5rem;
+}
+
+li {
+  list-style: none;
+}
+
+.play-area {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.hit,
+.stay {
+  font-size: 1.6rem;
+}
+
+.game-results {
+}
+
+.hidden {
+  display: none;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.reset {
+  width: 12rem;
+}
