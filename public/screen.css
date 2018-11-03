@@ -6,10 +6,14 @@ body {
   margin: 0;
   min-height: 100%;
   font: 16px / 1 sans-serif;
+  background-color: rgb(80, 155, 104);
 }
 
 h1 {
+  font-family: 'Ultra', serif;
+  font-weight: normal;
   color: white;
+  /* text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; */
   margin: 0;
   padding-top: 3.5rem;
   padding-bottom: 3.5rem;
@@ -18,12 +22,8 @@ h1 {
   background-position: center;
   font-size: 4.5rem;
   text-align: center;
-  background-image: linear-gradient(transparent, black),
+  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.75)),
     url('https://picjumbo.com/wp-content/uploads/playing-cards_free_stock_photos_picjumbo_DSC07167-2210x1473.jpg');
-}
-
-p {
-  font-size: 2.5rem;
 }
 
 li {
@@ -37,10 +37,25 @@ li {
 
 .hit,
 .stay {
+  font-family: 'Ultra', serif;
+  color: rgba(0, 0, 0, 0.6);
   font-size: 1.6rem;
+  width: 10rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-radius: 7px;
+  border: 3px solid rgba(0, 0, 0, 0.3);
+}
+
+.hit:hover,
+.stay:hover {
+  color: rgba(0, 0, 0, 0.75);
+  background-color: rgb(249, 114, 114);
+  cursor: pointer;
 }
 
 .game-results {
+  font-size: 2rem;
 }
 
 .hidden {
@@ -53,5 +68,18 @@ li {
 }
 
 .reset {
-  width: 12rem;
+  font-family: 'Ultra', serif;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 1.6rem;
+  width: 15rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-radius: 7px;
+  border: 3px solid rgba(0, 0, 0, 0.3);
+}
+
+.reset:hover {
+  color: rgba(0, 0, 0, 0.75);
+  background-color: rgb(249, 114, 114);
+  cursor: pointer;
 }

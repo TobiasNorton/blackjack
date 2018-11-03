@@ -58,41 +58,6 @@ let cardDeck = [
   { face: 'ace', value: 11, suit: 'diamonds' }
 ]
 
-// This code will build the deck dynamically
-//
-// // This will eventually be our deck of 52 cards
-// let deck = []
-//
-// // A list of all the suits we have
-// let suits = ['spades', 'hearts', 'clubs', 'diamonds']
-//
-// // The 13 cards that are in each suit
-// let cards = [
-//   { face: '2', value: 2 },
-//   { face: '3', value: 3 },
-//   { face: '4', value: 4 },
-//   { face: '5', value: 5 },
-//   { face: '6', value: 6 },
-//   { face: '7', value: 7 },
-//   { face: '8', value: 8 },
-//   { face: '9', value: 9 },
-//   { face: '10', value: 10 },
-//   { face: 'jack', value: 10 },
-//   { face: 'queen', value: 10 },
-//   { face: 'king', value: 10 },
-//   { face: 'ace', value: 11 }
-// ]
-//
-// for (let index = 0; index < suits.length; index++) {
-//   for (let cardIndex = 0; cardIndex < cards.length; cardIndex++) {
-//     deck.push({
-//       face: cards[cardIndex].face,
-//       value: cards[cardIndex].value,
-//       suit: suits[index]
-//     })
-//   }
-// }
-
 const dealCardToPlayer = () => {
   let playerHandList = document.querySelector('.player-hand')
   // - pop another card
@@ -119,8 +84,22 @@ const dealCardToPlayer = () => {
 
   if (thePlayerTotal > 21) {
     console.log('Bust! Dealer Wins!')
-    let bustForPlayer = document.querySelector('.game-results')
-    bustForPlayer.textContent = 'Bust! Dealer Wins!'
+    let gameResults = document.querySelector('.game-results')
+    gameResults.textContent = 'Bust! Dealer Wins!'
+
+    let hideHitButton = document.querySelector('.hit')
+    hideHitButton.classList.add('hidden')
+
+    let hideStayButton = document.querySelector('.stay')
+    hideStayButton.classList.add('hidden')
+
+    let showResetButton = document.querySelector('.reset')
+    showResetButton.classList.remove('hidden')
+  }
+  if (thePlayerTotal === 21) {
+    console.log('Blackjack! Player Wins')
+    let gameResults = document.querySelector('.game-results')
+    gameResults.textContent = 'Blackjack! You Win!'
 
     let hideHitButton = document.querySelector('.hit')
     hideHitButton.classList.add('hidden')
@@ -155,26 +134,11 @@ const dealCardToDealer = () => {
   let theDealerTotal = getDealerTotal()
   console.log(`The dealer's total is ${theDealerTotal}`)
 
-  // // If the dealer's cards total less than 17, add another card
-  // if (theDealerTotal < 17) {
-
-  // }
-
   let dealerTotalDisplay = document.querySelector('.dealer-total')
   dealerTotalDisplay.textContent = `Total ${theDealerTotal}`
-
-  if (theDealerTotal > 21) {
-    console.log('Dealer Busts! You Win!')
-    let bustForDealer = document.querySelector('.game-results')
-    bustForDealer.textContent = 'Dealer Busts! You Win!'
-
-    let hideHitButton = document.querySelector('.hit')
-    hideHitButton.classList.add('hidden')
-
-    let hideStayButton = document.querySelector('.stay')
-    hideStayButton.classList.add('hidden')
-  }
 }
+
+// If the dealer hand is less than 17, add one more card
 
 const getDealerTotal = () => {
   let dealerTotal = 0
@@ -184,6 +148,8 @@ const getDealerTotal = () => {
   }
   return dealerTotal
 }
+
+console.log(getDealerTotal())
 
 const resetGame = () => {
   location.reload()
@@ -207,12 +173,80 @@ const main = () => {
     dealCardToPlayer()
   }
 
-  console.log(dealerHand)
-
-  // If the dealer's cards total less than 17, add a card
   const revealDealerCards = () => {
-    if (dealerHand < 17) {
+    while (getDealerTotal() < 17) {
       dealCardToDealer()
+      if (getDealerTotal() >= 17 && getDealerTotal() === getPlayerTotal()) {
+        console.log('Tie game!')
+        let gameResults = document.querySelector('.game-results')
+        gameResults.textContent = 'Tie Game!'
+
+        let hideHitButton = document.querySelector('.hit')
+        hideHitButton.classList.add('hidden')
+
+        let hideStayButton = document.querySelector('.stay')
+        hideStayButton.classList.add('hidden')
+
+        let showResetButton = document.querySelector('.reset')
+        showResetButton.classList.remove('hidden')
+      }
+      if (getDealerTotal() >= 17 && getDealerTotal() > getPlayerTotal()) {
+        console.log('Dealer wins with a high score!')
+        let gameResults = document.querySelector('.game-results')
+        gameResults.textContent = 'Dealer Wins!'
+
+        let hideHitButton = document.querySelector('.hit')
+        hideHitButton.classList.add('hidden')
+
+        let hideStayButton = document.querySelector('.stay')
+        hideStayButton.classList.add('hidden')
+
+        let showResetButton = document.querySelector('.reset')
+        showResetButton.classList.remove('hidden')
+      }
+      if (getDealerTotal() >= 17 && getDealerTotal() < getPlayerTotal()) {
+        console.log('Player wins with a high score!')
+        let gameResults = document.querySelector('.game-results')
+        gameResults.textContent = 'You win!'
+
+        let hideHitButton = document.querySelector('.hit')
+        hideHitButton.classList.add('hidden')
+
+        let hideStayButton = document.querySelector('.stay')
+        hideStayButton.classList.add('hidden')
+
+        let showResetButton = document.querySelector('.reset')
+        showResetButton.classList.remove('hidden')
+      }
+
+      if (getDealerTotal() > 21) {
+        console.log('Dealer Busts! You Win!')
+        let gameResults = document.querySelector('.game-results')
+        gameResults.textContent = 'Dealer Busts! You Win!'
+
+        let hideHitButton = document.querySelector('.hit')
+        hideHitButton.classList.add('hidden')
+
+        let hideStayButton = document.querySelector('.stay')
+        hideStayButton.classList.add('hidden')
+
+        let showResetButton = document.querySelector('.reset')
+        showResetButton.classList.remove('hidden')
+      }
+      if (getDealerTotal() === 21) {
+        console.log('Blackjack! Dealer wins!')
+        let gameResults = document.querySelector('.game-results')
+        gameResults.textContent = 'Blackjack! Dealer Wins!'
+
+        let hideHitButton = document.querySelector('.hit')
+        hideHitButton.classList.add('hidden')
+
+        let hideStayButton = document.querySelector('.stay')
+        hideStayButton.classList.add('hidden')
+
+        let showResetButton = document.querySelector('.reset')
+        showResetButton.classList.remove('hidden')
+      }
     }
   }
 
