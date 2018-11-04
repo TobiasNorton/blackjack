@@ -2,7 +2,6 @@ let playerHand = []
 
 let dealerHand = []
 
-// This is our list of 52 cards
 let cardDeck = [
   { face: '2', value: 2, suit: 'spades' },
   { face: '3', value: 3, suit: 'spades' },
@@ -59,28 +58,27 @@ let cardDeck = [
 ]
 
 const dealCardToPlayer = () => {
-  let playerHandList = document.querySelector('.player-hand')
-  // - pop another card
   let card = cardDeck.pop()
-  // - push it to the hand
   playerHand.push(card)
-  // Add this card to the user interface by creating a new LI
-  let newCardItem = document.createElement('li')
-  // Make the text of the LI be the description of the card
-  newCardItem.textContent = `The ${card.face} of ${card.suit}`
-  // Append that LI to the UL
+
+  let playerHandList = document.querySelector('.player-hand')
+
+  let newCardItem = document.createElement('div')
+
+  let src = `./cards/${card.face}_of_${card.suit}.svg`
+  let alt = `The ${card.face} of ${card.suit}`
+  let newImage = document.createElement('img')
+  newImage.src = src
+  newImage.alt = alt
+  newCardItem.appendChild(newImage)
+
   playerHandList.appendChild(newCardItem)
 
-  let thePlayerTotal = getPlayerTotal() // JS finds the function,
-  // ...THEN looks at the parenthesis and says CALL
-  //...THEN is sees the assignment operator and stores the function
-  //...call inside the variable. So thePlayerTotal isn't equal to
-  //...the function, it's equal to the function CALL
+  let thePlayerTotal = getPlayerTotal()
 
   console.log(`The total of the player hand is ${thePlayerTotal}`)
   let playerTotalDisplay = document.querySelector('.player-total')
   playerTotalDisplay.textContent = `Total ${thePlayerTotal}`
-  // If player goes over 21, bust and dealer wins
 
   if (thePlayerTotal > 21) {
     console.log('Bust! Dealer Wins!')
@@ -118,16 +116,23 @@ const getPlayerTotal = () => {
     let card = playerHand[i]
     playerTotal += card.value
   }
-  return playerTotal // <-----Return means "dunzo"
+  return playerTotal
 }
 
 const dealCardToDealer = () => {
-  let dealerHandList = document.querySelector('.dealer-hand')
   let card = cardDeck.pop()
   dealerHand.push(card)
 
-  let newCardItem = document.createElement('li')
-  newCardItem.textContent = `The ${card.face} of ${card.suit}`
+  let dealerHandList = document.querySelector('.dealer-hand')
+
+  let newCardItem = document.createElement('div')
+
+  let src = `./cards/${card.face}_of_${card.suit}.svg`
+  let alt = `The ${card.face} of ${card.suit}`
+  let newImage = document.createElement('img')
+  newImage.src = src
+  newImage.alt = alt
+  newCardItem.appendChild(newImage)
 
   dealerHandList.appendChild(newCardItem)
 
@@ -138,8 +143,6 @@ const dealCardToDealer = () => {
   dealerTotalDisplay.textContent = `Total ${theDealerTotal}`
 }
 
-// If the dealer hand is less than 17, add one more card
-
 const getDealerTotal = () => {
   let dealerTotal = 0
   for (let i = 0; i < dealerHand.length; i++) {
@@ -149,8 +152,6 @@ const getDealerTotal = () => {
   return dealerTotal
 }
 
-console.log(getDealerTotal())
-
 const resetGame = () => {
   location.reload()
   console.log('Game Ready')
@@ -158,7 +159,7 @@ const resetGame = () => {
 
 const main = () => {
   // Shuffle the deck into a random order
-  // Uses [Fisher–Yates shuffle](https://en.wikipedia.org/wiki/Fisher–Yates_shuffle)
+  // Uses [Fisher–Yates shuffle]
   for (let index = 52 - 1; index > 1; index -= 1) {
     let otherIndex = Math.floor(Math.random() * index)
 
@@ -174,6 +175,12 @@ const main = () => {
   }
 
   const revealDealerCards = () => {
+    let hideCardbackOne = document.querySelector('.cardback-one')
+    hideCardbackOne.classList.add('hidden')
+
+    let hideCardbackTwo = document.querySelector('.cardback-two')
+    hideCardbackTwo.classList.add('hidden')
+
     while (getDealerTotal() < 17) {
       dealCardToDealer()
       if (getDealerTotal() >= 17 && getDealerTotal() === getPlayerTotal()) {
@@ -250,14 +257,10 @@ const main = () => {
     }
   }
 
-  // Find the hit button
   let hitButton = document.querySelector('.hit')
-  // Add an event listener on 'click' that does:
   hitButton.addEventListener('click', dealCardToPlayer)
 
-  // Find the stay button
   let stayButton = document.querySelector('.stay')
-  // Add an event listener on 'click' that...
   stayButton.addEventListener('click', revealDealerCards)
 
   let resetButton = document.querySelector('.reset')
