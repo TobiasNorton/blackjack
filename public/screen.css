@@ -36,7 +36,7 @@ h1 {
   font-family: 'Ultra', serif;
   color: white;
   text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
-  margin: 2.5rem 0;
+  margin: 2.5rem 2rem;
   font-size: 2rem;
   line-height: 2rem;
 }
@@ -46,6 +46,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   margin-left: 0.75rem;
+  padding-right: 0.6;
 }
 
 .right {
@@ -53,6 +54,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   margin-right: 0.75rem;
+  padding-left: 0.6;
 }
 
 .hit,
@@ -135,7 +137,7 @@ p {
   border-radius: 7px;
   border: 3px solid rgba(0, 0, 0, 0.3);
   background-color: white;
-  b
+  margin-bottom: 1rem;
 }
 
 .reset:hover {
@@ -183,4 +185,28 @@ p {
   .right {
     margin-right: 0.5rem;
   }
+}
+
+@media only screen and (min-width: 780px) {
+  .dealer-hand img,
+.player-hand img,
+.cardback-one,
+.cardback-two {
+  width: 128px;
+  height: 186px;
+}
+
+@media only screen and (min-width: 1080px) {
+h1 {
+  font-size: 5.5rem;
+}
+
+.game-results {
+  font-size: 2.5rem;
+}
+
+.play-area {
+  margin-top: 2rem;
+}
+
 }

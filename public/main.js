@@ -62,7 +62,6 @@ const dealCardToPlayer = () => {
   playerHand.push(card)
 
   let playerHandList = document.querySelector('.player-hand')
-
   let newCardItem = document.createElement('div')
 
   let src = `./cards/${card.face}_of_${card.suit}.svg`
