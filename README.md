@@ -12,4 +12,10 @@ See it live: http://blackjack-tobiasnorton.surge.sh
 
 - Built entirely with core JavaScript and no frameworks. It was assigned as an exercise for using conditional logic to update DOM elements. I'm happy to say that the instructor liked my CSS and code enough that he later used my project as a template to demonstrate for the class how to implement React.js and a playing cards API.
 
-- Built with JavaScript, HTML and CSS
+### Built with:
+
+- JavaScript - https://www.javascript.com/
+
+- CSS
+
+- HTML
