@@ -1,7 +1,7 @@
 # Blackjack
 
 <p align="center">
-  <img src="https://github.com/TobiasNorton/blackjack/blob/master/public/Blackjack.gif?raw=true" alt="Minesweeper animation"/>
+  <img src="https://github.com/TobiasNorton/blackjack/blob/master/public/Blackjack.gif?raw=true" alt="Blackjack animation"/>
 </p>
 
 See it live: http://blackjack-tobiasnorton.surge.sh
